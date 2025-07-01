@@ -16,7 +16,7 @@ public class Principal {
     private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=6585022c";
-    private List<DadosSerie> dadosSeries = new ArrayList<>(); 
+    private List<DadosSerie> dadosSeries = new ArrayList<>();
 
     public void exibeMenu() {
 
@@ -41,7 +41,7 @@ public class Principal {
                 case 2:
                     buscarEpisodioPorSerie();
                     break;
-                case 3: 
+                case 3:
                     listarSeriesBuscadas();
                     break;
                 case 0:
@@ -58,18 +58,18 @@ public class Principal {
         dadosSeries.forEach(System.out::println);
     }
 
-    private void buscarSerieWeb() {
-        DadosSerie dados = getDadosSerie();
-        dadosSeries.add(dados);
-        System.out.println(dados);
-    }
-
     private DadosSerie getDadosSerie() {
         System.out.println("Digite o nome da série para busca");
         var nomeSerie = leitura.nextLine();
         var json = consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
         DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
         return dados;
+    }
+
+    private void buscarSerieWeb() {
+        DadosSerie dados = getDadosSerie();
+        dadosSeries.add(dados);
+        System.out.println(dados);
     }
 
     private void buscarEpisodioPorSerie() {
